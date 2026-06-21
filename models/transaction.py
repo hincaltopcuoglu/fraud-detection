@@ -50,6 +50,9 @@ class Transaction:
     def event_type(self):
         return "transaction"
 
+    def __repr__(self):
+        return f"Transaction(id={self.transaction_id!r}, user={self.user_id!r}, amount={self.amount} {self.currency!r})"
+
 
 
 class LabeledTransaction(Transaction):
@@ -69,5 +72,5 @@ class LabeledTransaction(Transaction):
     def event_type(self):
         return "fraud" if self.is_fraud else "legit"
 
-
-
+    def __repr__(self):
+        return f"LabeledTransaction(id={self.transaction_id!r}, user={self.user_id!r}, amount={self.amount} {self.currency!r}, fraud={self.is_fraud}, type={self.fraud_type!r})"

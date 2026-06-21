@@ -1,0 +1,7 @@
+kafka-python==2.0.2
+aiokafka==0.10.0
+pyspark==3.5.1
+setuptools>=68.0
+redis==5.0.1
+river==0.21.0
+clickhouse-driver==0.2.7

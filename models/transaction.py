@@ -50,6 +50,24 @@ class Transaction:
     def event_type(self):
         return "transaction"
 
+    def __eq__(self, other):
+        if type(other) is not Transaction:
+            return NotImplemented
+        return (
+            self.transaction_id == other.transaction_id and
+            self.user_id == other.user_id and
+            self.merchant_id == other.merchant_id and
+            self.amount == other.amount and
+            self.currency == other.currency and
+            self.timestamp == other.timestamp and
+            self.country == other.country and
+            self.device_id == other.device_id and
+            self.is_online == other.is_online
+        )
+
+    def __hash__(self):
+        return hash(self.transaction_id)
+
     def __repr__(self):
         return f"Transaction(id={self.transaction_id!r}, user={self.user_id!r}, amount={self.amount} {self.currency!r})"
 
@@ -71,6 +89,26 @@ class LabeledTransaction(Transaction):
 
     def event_type(self):
         return "fraud" if self.is_fraud else "legit"
+
+    def __eq__(self, other):
+        if type(other) is not LabeledTransaction:
+            return NotImplemented
+        return (
+        self.transaction_id == other.transaction_id and
+        self.user_id == other.user_id and
+        self.merchant_id == other.merchant_id and
+        self.amount == other.amount and
+        self.currency == other.currency and
+        self.timestamp == other.timestamp and
+        self.country == other.country and
+        self.device_id == other.device_id and
+        self.is_online == other.is_online and
+        self.is_fraud == other.is_fraud and
+        self.fraud_type == other.fraud_type
+    )
+
+    def __hash__(self):
+        return hash(self.transaction_id)
 
     def __repr__(self):
         return f"LabeledTransaction(id={self.transaction_id!r}, user={self.user_id!r}, amount={self.amount} {self.currency!r}, fraud={self.is_fraud}, type={self.fraud_type!r})"
